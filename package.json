@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.21.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.10",
     "node": "^15.0.1"
@@ -15,7 +14,7 @@
   },
   "scripts": {
     "client": "cd client && npm start",
-    "server": "node server.js",
+    "server": "nodemon server.js",
     "start": "concurrently - kill-others \"npm run server\" \"npm run client\""
   },
   "repository": {
