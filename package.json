@@ -1,0 +1,32 @@
+{
+  "name": "Basic-CRUD-Mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.10",
+    "node": "^15.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "node server.js",
+    "start": "concurrently - kill-others \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarleeG/Basic-CRUD-Mongo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarleeG/Basic-CRUD-Mongo/issues"
+  },
+  "homepage": "https://github.com/MarleeG/Basic-CRUD-Mongo#readme"
+}
