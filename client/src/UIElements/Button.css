@@ -1,0 +1,11 @@
+button{
+    border: none;
+    width: 10%;
+    border-radius: 15px;
+    font-size: 40px;
+    color: #282c34;
+}
+
+button.form-btn:active{
+    border: 1px solid yellowgreen;
+}
