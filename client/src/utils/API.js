@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export default {
     getAllTasks: function () {
-        console.log('API: getting all tasks')
-        return axios.get("/api/all")
+        console.log('API: getting all tasks');
+        return axios.get("/api/all");
     },
     createTask: (task) => {
         return axios.post('/api/all', task)

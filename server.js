@@ -36,7 +36,7 @@ mongoose
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
-  ).then(() => console.log('connected to the DB'))
+  ).then(() => console.log('Connected to the DB'))
   .catch((error) => console.log(error));
 
 // Send every request to the React app
