@@ -1,15 +1,13 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import Button from "../UIElements/Button";
 import Input from "../UIElements/Input";
 import API from "../utils/API";
-import axios from 'axios';
 
 import "./Tasks.css";
 // const ap = axios.create({
 //     baseURL: `http://localhost:3001/`
 // })
-
 
 const log = console.log;
 const Tasks = () => {
@@ -45,56 +43,62 @@ const Tasks = () => {
     createTask(task);
   };
 
-//   const getAllTasks = async () => {
-//     log(`ALL TASKS`);
+  //   const getAllTasks = async () => {
+  //     log(`ALL TASKS`);
 
-//     let myTasks; 
-//       try{
-//         myTasks = await API.getAllTasks()
-//       }catch(err){
-//         log(err);
-//         myTasks = [];
-//         throw err;
-//     }
+  //     let myTasks;
+  //       try{
+  //         myTasks = await API.getAllTasks()
+  //       }catch(err){
+  //         log(err);
+  //         myTasks = [];
+  //         throw err;
+  //     }
 
-//     log(myTasks);
-//   }
+  //     log(myTasks);
+  //   }
 
-
-const getAllTasks = () => {
+  const getAllTasks = () => {
     log(`ALL TASKS`);
 
-    let myTasks; 
-    //   try{
-    //     myTasks = await API.getAllTasks()
-    //   }catch(err){
-    //     log(err);
-    //     myTasks = [];
-    //     throw err;
-    // }
-
+    let myTasks;
 
     API.getAllTasks()
-    .then(res => myTasks = res)
-    .catch(err=> log(`err: ${err}`))
+      .then((res) => {
+        myTasks = res.data;
+        log(myTasks);
 
-    log(myTasks);
-  }
+        updateAllTasks(myTasks);
+      })
+      .catch((err) => log(`err: ${err}`));
+
+    // log(myTasks);
+  };
 
   useEffect(() => {
     getAllTasks();
 
-
+    log("All Tasks---");
+    log(allTasks);
   }, []);
   return (
     <div className="tasks__container">
       <h1 className="font-henny-penny">Tasks</h1>
 
-      {/* <div className="tasks__lists">
+      {allTasks.length > 0 && (
+        <div className="tasks__lists">
           <ul>
-
+            {allTasks.map((tsk, key) => {
+              const { _id, completed, name } = tsk;
+              return (
+                <li key={_id}>
+                  {name} | <span>Completed:  {completed ? 'no': 'yes'} </span>{" "}
+                </li>
+              );
+            })}
           </ul>
-      </div> */}
+        </div>
+      )}
 
       <div className="tasks__input-wrapper">
         <form onSubmit={handleSubmit}>
