@@ -1,10 +1,16 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import Button from "../UIElements/Button";
 import Input from "../UIElements/Input";
 import API from "../utils/API";
-// import React from 'react';
+import axios from 'axios';
 
 import "./Tasks.css";
+// const ap = axios.create({
+//     baseURL: `http://localhost:3001/`
+// })
+
+
 const log = console.log;
 const Tasks = () => {
   const [allTasks, updateAllTasks] = useState([]);
@@ -39,23 +45,46 @@ const Tasks = () => {
     createTask(task);
   };
 
-  const getAllTasks = async () => {
+//   const getAllTasks = async () => {
+//     log(`ALL TASKS`);
+
+//     let myTasks; 
+//       try{
+//         myTasks = await API.getAllTasks()
+//       }catch(err){
+//         log(err);
+//         myTasks = [];
+//         throw err;
+//     }
+
+//     log(myTasks);
+//   }
+
+
+const getAllTasks = () => {
     log(`ALL TASKS`);
 
     let myTasks; 
-      try{
-        myTasks = await API.getAllTasks()
-      }catch(err){
-        log(err);
-        myTasks = [];
-        throw err;
-    }
+    //   try{
+    //     myTasks = await API.getAllTasks()
+    //   }catch(err){
+    //     log(err);
+    //     myTasks = [];
+    //     throw err;
+    // }
+
+
+    API.getAllTasks()
+    .then(res => myTasks = res)
+    .catch(err=> log(`err: ${err}`))
 
     log(myTasks);
   }
 
   useEffect(() => {
     getAllTasks();
+
+
   }, []);
   return (
     <div className="tasks__container">
