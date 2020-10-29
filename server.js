@@ -35,6 +35,7 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false
     }
   ).then(() => console.log('Connected to the DB'))
   .catch((error) => console.log(error));

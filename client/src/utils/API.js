@@ -12,8 +12,12 @@ export default {
   createTask: (task) => {
     return axios.post("/api/all", task);
   },
-  completeTask: (id) => {
-    return axios.put(`/api/all/${id}`);
+  completeTask: (id, body) => {
+    return axios.put(`/api/all/${id}`, body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   },
   // updateTask: (id)=> {
   //     return

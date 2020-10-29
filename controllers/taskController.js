@@ -20,7 +20,6 @@ module.exports = {
     // log(req);
     // log(res);
 
-
     let tasks;
 
     try {
@@ -51,9 +50,29 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   update: (req, res) => {
-    db.Task.findOneAndUpdate({ id: req.params.id }, req.body)
-      .then((tsk) => res.json(tsk))
-      .catch((err) => res.status(422).json(err));
+    const filter = { _id: req.params.id };
+    log('--------');
+
+    log("update");
+    log(`id: ${filter.id}`);
+    log(req.body);
+
+    log('--------');
+
+    const update = req.body;
+
+    db.Task.findOneAndUpdate(filter, update)
+      .then((tsk) => {
+        log("--------");
+        log("promise");
+        log("--------");
+
+        return res.json(tsk);
+      })
+      .catch((err) => {
+        log("error");
+        return res.status(422).json(err);
+      });
   },
   remove: (req, res) => {
     db.Task.findById(req.params.id)

@@ -64,7 +64,7 @@ const Tasks = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const task = { name: taskInputVal, completed: false };
+    const task = { name: taskInputVal };
     createTask(task);
   };
 
@@ -75,6 +75,25 @@ const Tasks = () => {
         getAllTasks();
       })
       .catch((err) => log(err));
+  };
+
+  const completeTask = (id) => {
+    log("COMPLETING TASK---");
+    log(id);
+
+    // API.completeTask(id, { completed: true })
+    //   .then((res) => {
+    //     log(res);
+    //     getAllTasks();
+    //   })
+    //   .catch((err) => log(err));
+
+
+    API.completeTask(id, { completed: true });
+
+    getAllTasks()
+    //   .then((res) => log(res))
+    //   .catch((err) => log(err));
   };
 
   //   const getAllTasks = async () => {
@@ -108,21 +127,27 @@ const Tasks = () => {
             {allTasks.map((tsk, key) => {
               const { _id, completed, name } = tsk;
               return (
-                <li
-                  key={_id}
-                  className="tasks__li"
-                  
-                >
+                <li key={_id} className="tasks__li">
                   {name} |{" "}
                   <span>
-                    Completed: {completed ? "no" : "yes"}
+                    Completed: {completed ? "yes" : "no"}
                     {" | "}
                     <Button
                       text="delete"
                       type="button"
                       classes="task-delete-btn"
-                    //   onClick={() => deleteTask(_id)}
-                      deleteTask={deleteTask}
+                      //   deleteTask={deleteTask}
+
+                      method={deleteTask}
+                      id={_id}
+                    />
+                    {}
+                    <Button
+                      text="complete"
+                      type="button"
+                      classes="task-complete-btn"
+                      //   completeTask={completeTask}
+                      method={completeTask}
                       id={_id}
                     />
                   </span>{" "}
