@@ -24,16 +24,26 @@ const Tasks = () => {
     }
   };
 
-  const createTask = (task) => {
+  const clearAddTaskInput = () => {
+    updateTaskInputVal("");
+  }
+
+  const createTask = async (task) => {
     log(`ADDING TASK`);
     log(task);
+
     try {
-      API.createTask(task);
+      await API.createTask(task);
     } catch (err) {
       if (err) {
         log(err);
       }
     }
+
+    getAllTasks();
+    clearAddTaskInput()
+
+
   };
 
   const handleSubmit = (e) => {
