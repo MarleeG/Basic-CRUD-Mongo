@@ -26,47 +26,7 @@ const Tasks = () => {
 
   const clearAddTaskInput = () => {
     updateTaskInputVal("");
-  }
-
-  const createTask = async (task) => {
-    log(`ADDING TASK`);
-    log(task);
-
-    try {
-      await API.createTask(task);
-    } catch (err) {
-      if (err) {
-        log(err);
-      }
-    }
-
-    getAllTasks();
-    clearAddTaskInput()
-
-
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const task = { name: taskInputVal, completed: false };
-    createTask(task);
-  };
-
-  //   const getAllTasks = async () => {
-  //     log(`ALL TASKS`);
-
-  //     let myTasks;
-  //       try{
-  //         myTasks = await API.getAllTasks()
-  //       }catch(err){
-  //         log(err);
-  //         myTasks = [];
-  //         throw err;
-  //     }
-
-  //     log(myTasks);
-  //   }
 
   const getAllTasks = () => {
     log(`ALL TASKS`);
@@ -85,6 +45,53 @@ const Tasks = () => {
     // log(myTasks);
   };
 
+  const createTask = async (task) => {
+    log(`ADDING TASK`);
+    log(task);
+
+    try {
+      await API.createTask(task);
+    } catch (err) {
+      if (err) {
+        log(err);
+      }
+    }
+
+    getAllTasks();
+    clearAddTaskInput();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const task = { name: taskInputVal, completed: false };
+    createTask(task);
+  };
+
+  const deleteTask = (id) => {
+    API.deleteTask(id)
+      .then((res) => {
+        log(res);
+        getAllTasks();
+      })
+      .catch((err) => log(err));
+  };
+
+  //   const getAllTasks = async () => {
+  //     log(`ALL TASKS`);
+
+  //     let myTasks;
+  //       try{
+  //         myTasks = await API.getAllTasks()
+  //       }catch(err){
+  //         log(err);
+  //         myTasks = [];
+  //         throw err;
+  //     }
+
+  //     log(myTasks);
+  //   }
+
   useEffect(() => {
     getAllTasks();
 
@@ -101,8 +108,24 @@ const Tasks = () => {
             {allTasks.map((tsk, key) => {
               const { _id, completed, name } = tsk;
               return (
-                <li key={_id}>
-                  {name} | <span>Completed:  {completed ? 'no': 'yes'} </span>{" "}
+                <li
+                  key={_id}
+                  className="tasks__li"
+                  
+                >
+                  {name} |{" "}
+                  <span>
+                    Completed: {completed ? "no" : "yes"}
+                    {" | "}
+                    <Button
+                      text="delete"
+                      type="button"
+                      classes="task-delete-btn"
+                    //   onClick={() => deleteTask(_id)}
+                      deleteTask={deleteTask}
+                      id={_id}
+                    />
+                  </span>{" "}
                 </li>
               );
             })}
