@@ -9,3 +9,12 @@ button{
 button.form-btn:active{
     border: 1px solid yellowgreen;
 }
+
+button.task-delete-btn{
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+button.task-delete-btn:active{
+    background-color:red;
+}
