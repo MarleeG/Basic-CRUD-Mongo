@@ -1,20 +1,28 @@
-button{
-    border: none;
-    width: 10%;
-    border-radius: 15px;
-    font-size: 40px;
-    color: #282c34;
+button {
+  border: none;
+  width: 10%;
+  border-radius: 15px;
+  font-size: 40px;
+  color: #282c34;
 }
 
-button.form-btn:active{
-    border: 1px solid yellowgreen;
+button.form-btn:active {
+  border: 1px solid yellowgreen;
 }
 
-button.task-delete-btn{
-    font-size: 15px;
-    border-radius: 5px;
+button.task-delete-btn,
+button.task-complete-btn {
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 0px 2px;
 }
 
-button.task-delete-btn:active{
-    background-color:red;
+button.task-delete-btn:active {
+  background-color: red;
+}
+
+/* complete button for tasks */
+
+button.task-complete-btn:active {
+  background-color: yellowgreen;
 }
