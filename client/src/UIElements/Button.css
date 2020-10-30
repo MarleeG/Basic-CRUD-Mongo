@@ -1,8 +1,8 @@
 button {
   border: none;
   width: 10%;
-  border-radius: 15px;
-  font-size: 40px;
+  border-radius: 5px;
+  font-size: 30px;
   color: #282c34;
 }
 
@@ -11,7 +11,7 @@ button.form-btn:active {
 }
 
 button.task-delete-btn,
-button.task-complete-btn {
+button.task-complete-btn, button.task-change-btn {
   font-size: 15px;
   border-radius: 5px;
   margin: 0px 2px;
@@ -25,4 +25,8 @@ button.task-delete-btn:active {
 
 button.task-complete-btn:active {
   background-color: yellowgreen;
+}
+
+button.task-change-btn:active{
+    background-color: tomato;
 }

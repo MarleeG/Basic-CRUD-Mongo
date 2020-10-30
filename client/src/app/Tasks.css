@@ -44,7 +44,22 @@ input:focus {
   outline: none;
 }
 
+.tasks__lists {
+  border-top: 2px solid white;
+  height: 70%;
+  overflow: scroll;
+}
 
-.tasks__li{
-    margin: 5px;
+ul.task_ul {
+  padding: 0px;
+  /* border: 2px dotted red; */
+}
+.tasks__li {
+  margin: 15px auto;
+  list-style-type: none;
+  border: 2px solid gray;
+  padding: 10px;
+  /* width: 100%; */
+  width: 70%;
+  /* margin: auto; */
 }

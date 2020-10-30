@@ -14,6 +14,8 @@ const Tasks = () => {
   const [allTasks, updateAllTasks] = useState([]);
 
   const [taskInputVal, updateTaskInputVal] = useState("");
+
+  const [formSubmitBtnText, updateFormSubmitBtnText] = useState("ADD");
   const handleChange = (e) => {
     const { name, value } = e.target;
     // log(`name: ${name}`);
@@ -73,6 +75,7 @@ const Tasks = () => {
       .then((res) => {
         log(res);
         getAllTasks();
+        clearAddTaskInput();
       })
       .catch((err) => log(err));
   };
@@ -88,12 +91,24 @@ const Tasks = () => {
     //   })
     //   .catch((err) => log(err));
 
-
     API.completeTask(id, { completed: true });
 
-    getAllTasks()
+    getAllTasks();
     //   .then((res) => log(res))
     //   .catch((err) => log(err));
+  };
+
+  const changeTask = (id) => {
+    log("change task");
+
+    log(id);
+    const { name, _id, completed } = allTasks.find((tsk) => tsk._id === id);
+
+    updateTaskInputVal(name);
+
+    updateFormSubmitBtnText("UPDATE")
+
+    // log(name);
   };
 
   //   const getAllTasks = async () => {
@@ -123,7 +138,7 @@ const Tasks = () => {
 
       {allTasks.length > 0 && (
         <div className="tasks__lists">
-          <ul>
+          <ul className="task_ul">
             {allTasks.map((tsk, key) => {
               const { _id, completed, name } = tsk;
               return (
@@ -150,6 +165,14 @@ const Tasks = () => {
                       method={completeTask}
                       id={_id}
                     />
+                    <Button
+                      text="change"
+                      type="button"
+                      classes="task-change-btn"
+                      //   completeTask={completeTask}
+                      method={changeTask}
+                      id={_id}
+                    />
                   </span>{" "}
                 </li>
               );
@@ -170,7 +193,11 @@ const Tasks = () => {
 
           {/* <button type="submit">ADD</button> */}
 
-          <Button type="submit" text="ADD" classes="font-syne form-btn" />
+          <Button
+            type="submit"
+            text={formSubmitBtnText}
+            classes="font-syne form-btn"
+          />
         </form>
       </div>
     </div>
