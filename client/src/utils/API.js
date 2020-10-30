@@ -10,7 +10,11 @@ export default {
     });
   },
   createTask: (task) => {
-    return axios.post("/api/all", task);
+    return axios.post("/api/all", task, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
   },
   completeTask: (id, body) => {
     return axios.put(`/api/all/${id}`, body, {
