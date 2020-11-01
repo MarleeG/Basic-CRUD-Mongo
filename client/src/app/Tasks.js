@@ -16,6 +16,9 @@ const Tasks = () => {
   const [taskInputVal, updateTaskInputVal] = useState("");
 
   const [formSubmitBtnText, updateFormSubmitBtnText] = useState("ADD");
+
+  const [newTaskID, updateNewTaskID] = useState();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     // log(`name: ${name}`);
@@ -48,6 +51,8 @@ const Tasks = () => {
   };
 
   const createTask = async (task) => {
+    updateFormSubmitBtnText("ADD");
+
     log(`ADDING TASK`);
     log(task);
 
@@ -66,11 +71,17 @@ const Tasks = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const task = { name: taskInputVal };
-    createTask(task);
+    if (newTaskID !== undefined) {
+
+    } else {
+      const task = { name: taskInputVal };
+      createTask(task);
+    }
   };
 
   const deleteTask = (id) => {
+    updateFormSubmitBtnText("ADD");
+
     API.deleteTask(id)
       .then((res) => {
         log(res);
@@ -81,6 +92,8 @@ const Tasks = () => {
   };
 
   const completeTask = (id) => {
+    updateFormSubmitBtnText("ADD");
+
     log("COMPLETING TASK---");
     log(id);
 
@@ -99,14 +112,16 @@ const Tasks = () => {
   };
 
   const changeTask = (id) => {
+    updateFormSubmitBtnText("UPDATE");
+
+    updateNewTaskID(id);
+
     log("change task");
 
     log(id);
     const { name, _id, completed } = allTasks.find((tsk) => tsk._id === id);
 
     updateTaskInputVal(name);
-
-    updateFormSubmitBtnText("UPDATE")
 
     // log(name);
   };
@@ -151,6 +166,7 @@ const Tasks = () => {
                       text="delete"
                       type="button"
                       classes="task-delete-btn"
+                      disabled={completed ? true : false}
                       //   deleteTask={deleteTask}
 
                       method={deleteTask}
@@ -161,6 +177,7 @@ const Tasks = () => {
                       text="complete"
                       type="button"
                       classes="task-complete-btn"
+                      disabled={completed ? true : false}
                       //   completeTask={completeTask}
                       method={completeTask}
                       id={_id}
@@ -169,6 +186,7 @@ const Tasks = () => {
                       text="change"
                       type="button"
                       classes="task-change-btn"
+                      disabled={completed ? true : false}
                       //   completeTask={completeTask}
                       method={changeTask}
                       id={_id}
