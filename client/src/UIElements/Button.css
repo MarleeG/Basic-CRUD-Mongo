@@ -30,3 +30,7 @@ button.task-complete-btn:active {
 button.task-change-btn:active{
     background-color: tomato;
 }
+
+button:disabled{
+    background-color: gray;
+}

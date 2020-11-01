@@ -1,9 +1,11 @@
 import "./Button.css";
 const Button = (props) => {
-  const { type, text, classes, method, id } = props;
+  const { type, text, classes, method, disabled, id, updating } = props;
   return (
-    <button type={type || "button"} className={classes} onClick={() => {
-        if(method){
+    <button disabled={disabled} type={type || "button"} className={classes} onClick={() => {
+        if(method && updating){
+            method(id, updating)
+        }else if(method){
             method(id)
         }
     }}>
