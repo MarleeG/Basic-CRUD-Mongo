@@ -17,7 +17,7 @@ const Tasks = () => {
 
   const [formSubmitBtnText, updateFormSubmitBtnText] = useState("ADD");
 
-  const [newTaskID, updateNewTaskID] = useState();
+  const [newTaskID, updateNewTaskID] = useState(undefined);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +51,7 @@ const Tasks = () => {
   };
 
   const createTask = async (task) => {
+    updateNewTaskID(undefined);
     updateFormSubmitBtnText("ADD");
 
     log(`ADDING TASK`);
@@ -72,7 +73,8 @@ const Tasks = () => {
     e.preventDefault();
 
     if (newTaskID !== undefined) {
-
+      completeTask(newTaskID, {name: taskInputVal});
+      clearAddTaskInput();
     } else {
       const task = { name: taskInputVal };
       createTask(task);
@@ -80,6 +82,7 @@ const Tasks = () => {
   };
 
   const deleteTask = (id) => {
+    updateNewTaskID(undefined);
     updateFormSubmitBtnText("ADD");
 
     API.deleteTask(id)
@@ -91,7 +94,8 @@ const Tasks = () => {
       .catch((err) => log(err));
   };
 
-  const completeTask = (id) => {
+  const completeTask = (id, updating) => {
+    updateNewTaskID(undefined);
     updateFormSubmitBtnText("ADD");
 
     log("COMPLETING TASK---");
@@ -104,7 +108,7 @@ const Tasks = () => {
     //   })
     //   .catch((err) => log(err));
 
-    API.completeTask(id, { completed: true });
+    API.completeTask(id, updating);
 
     getAllTasks();
     //   .then((res) => log(res))
@@ -180,6 +184,7 @@ const Tasks = () => {
                       disabled={completed ? true : false}
                       //   completeTask={completeTask}
                       method={completeTask}
+                      updating={{completed: true}}
                       id={_id}
                     />
                     <Button
@@ -189,6 +194,7 @@ const Tasks = () => {
                       disabled={completed ? true : false}
                       //   completeTask={completeTask}
                       method={changeTask}
+                      // updating={{name: taskInputVal}}
                       id={_id}
                     />
                   </span>{" "}
