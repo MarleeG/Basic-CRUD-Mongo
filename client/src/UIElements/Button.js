@@ -8,7 +8,6 @@ const Button = (props) => {
         }else if(method){
             method(id)
         }
-        
     }}>
       {text}
     </button>

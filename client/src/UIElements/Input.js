@@ -1,5 +1,3 @@
-import "./Input.css";
-
 const Input = (props) => {
   const { type, name, value, classes, handleChange } = props;
 
