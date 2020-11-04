@@ -22,7 +22,6 @@ button.task-delete-btn:active {
 }
 
 /* complete button for tasks */
-
 button.task-complete-btn:active {
   background-color: yellowgreen;
 }

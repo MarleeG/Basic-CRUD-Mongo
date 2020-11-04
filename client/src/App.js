@@ -1,4 +1,3 @@
-import './App.css';
 import Tasks from './app/Tasks';
 
 const App = () => {
